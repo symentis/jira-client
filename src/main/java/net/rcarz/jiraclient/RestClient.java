@@ -1,7 +1,7 @@
 /**
  * jira-client - a simple JIRA REST client
  * Copyright (c) 2013 Bob Carroll (bob.carroll@alum.rit.edu)
- * 
+ *
  * This library is free software; you can redistribute it and/or
  * modify it under the terms of the GNU Lesser General Public
  * License as published by the Free Software Foundation; either
@@ -22,20 +22,9 @@ package net.rcarz.jiraclient;
 import net.sf.json.JSON;
 import net.sf.json.JSONObject;
 import net.sf.json.JSONSerializer;
-
-import org.apache.http.Header;
-import org.apache.http.HeaderElement;
-import org.apache.http.HttpEntity;
-import org.apache.http.HttpResponse;
-import org.apache.http.NameValuePair;
-import org.apache.http.StatusLine;
+import org.apache.http.*;
 import org.apache.http.client.HttpClient;
-import org.apache.http.client.methods.HttpDelete;
-import org.apache.http.client.methods.HttpEntityEnclosingRequestBase;
-import org.apache.http.client.methods.HttpGet;
-import org.apache.http.client.methods.HttpPost;
-import org.apache.http.client.methods.HttpPut;
-import org.apache.http.client.methods.HttpRequestBase;
+import org.apache.http.client.methods.*;
 import org.apache.http.client.utils.URIBuilder;
 import org.apache.http.entity.StringEntity;
 import org.apache.http.entity.mime.MultipartEntity;
@@ -44,12 +33,7 @@ import org.apache.http.entity.mime.content.FileBody;
 import org.apache.http.entity.mime.content.InputStreamBody;
 import org.apache.http.util.EntityUtils;
 
-import java.io.BufferedReader;
-import java.io.File;
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.InputStreamReader;
-import java.io.UnsupportedEncodingException;
+import java.io.*;
 import java.net.URI;
 import java.net.URISyntaxException;
 import java.util.Map;
@@ -136,7 +120,7 @@ public class RestClient {
             if (ent.getContentEncoding() != null) {
             	encoding = ent.getContentEncoding().getValue();
             }
-            
+
             if (encoding == null) {
     	        Header contentTypeHeader = resp.getFirstHeader("Content-Type");
     	        HeaderElement[] contentTypeElements = contentTypeHeader.getElements();
@@ -147,7 +131,7 @@ public class RestClient {
     	        	}
     	        }
             }
-            
+
             InputStreamReader isr =  encoding != null ?
                 new InputStreamReader(ent.getContent(), encoding) :
                 new InputStreamReader(ent.getContent());
@@ -178,13 +162,9 @@ public class RestClient {
 
         if (payload != null) {
             StringEntity ent = null;
-
-            try {
-                ent = new StringEntity(payload, "UTF-8");
-                ent.setContentType("application/json");
-            } catch (UnsupportedEncodingException ex) {
-                /* utf-8 should always be supported... */
-            }
+            
+            ent = new StringEntity(payload, "UTF-8");
+            ent.setContentType("application/json");
 
             req.addHeader("Content-Type", "application/json");
             req.setEntity(ent);
@@ -192,7 +172,7 @@ public class RestClient {
 
         return request(req);
     }
-    
+
     private JSON request(HttpEntityEnclosingRequestBase req, File file)
         throws RestException, IOException {
         if (file != null) {
@@ -371,7 +351,7 @@ public class RestClient {
 
         return post(buildURI(path), payload);
     }
-    
+
     /**
      * Executes an HTTP POST with the given path.
      *
@@ -385,16 +365,16 @@ public class RestClient {
      */
     public JSON post(String path)
         throws RestException, IOException, URISyntaxException {
-    	
+
         return post(buildURI(path), new JSONObject());
     }
-    
+
     /**
      * Executes an HTTP POST with the given path and file payload.
-     * 
+     *
      * @param path Full URI of the remote endpoint
      * @param file java.io.File
-     * 
+     *
      * @throws URISyntaxException ex
      * @throws IOException ex
      * @throws RestException ex
@@ -474,7 +454,7 @@ public class RestClient {
 
         return put(buildURI(path, params), payload);
     }
-    
+
     /**
      * Exposes the http client.
      *
