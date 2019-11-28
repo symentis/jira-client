@@ -1,22 +1,3 @@
-/**
- * jira-client - a simple JIRA REST client
- * Copyright (c) 2013 Bob Carroll (bob.carroll@alum.rit.edu)
- *
- * This library is free software; you can redistribute it and/or
- * modify it under the terms of the GNU Lesser General Public
- * License as published by the Free Software Foundation; either
- * version 2.1 of the License, or (at your option) any later version.
-
- * This library is distributed in the hope that it will be useful,
- * but WITHOUT ANY WARRANTY; without even the implied warranty of
- * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
- * Lesser General Public License for more details.
- *
- * You should have received a copy of the GNU Lesser General Public
- * License along with this library; if not, write to the Free Software
- * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
- */
-
 package net.rcarz.jiraclient;
 
 import net.sf.json.JSON;
@@ -39,7 +20,22 @@ import java.net.URISyntaxException;
 import java.util.Map;
 
 /**
- * A simple REST client that speaks JSON.
+ * jira-client - a simple JIRA REST client
+ * Copyright (c) 2013 Bob Carroll (bob.carroll@alum.rit.edu)
+ *
+ * This library is free software; you can redistribute it and/or
+ * modify it under the terms of the GNU Lesser General Public
+ * License as published by the Free Software Foundation; either
+ * version 2.1 of the License, or (at your option) any later version.
+
+ * This library is distributed in the hope that it will be useful,
+ * but WITHOUT ANY WARRANTY; without even the implied warranty of
+ * MERCHANTABILITY or FITNESS FOR A PARTICULAR PURPOSE.  See the GNU
+ * Lesser General Public License for more details.
+ *
+ * You should have received a copy of the GNU Lesser General Public
+ * License along with this library; if not, write to the Free Software
+ * Foundation, Inc., 51 Franklin Street, Fifth Floor, Boston, MA  02110-1301  USA
  */
 public class RestClient {
 
@@ -95,7 +91,7 @@ public class RestClient {
      */
     public URI buildURI(String path, Map<String, String> params) throws URISyntaxException {
         URIBuilder ub = new URIBuilder(uri);
-        ub.setPath(ub.getPath() + path);
+        ub.setPath(path);
 
         if (params != null) {
             for (Map.Entry<String, String> ent : params.entrySet())
@@ -162,7 +158,7 @@ public class RestClient {
 
         if (payload != null) {
             StringEntity ent = null;
-            
+
             ent = new StringEntity(payload, "UTF-8");
             ent.setContentType("application/json");
 
