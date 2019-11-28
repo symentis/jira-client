@@ -4,6 +4,8 @@
 
 jira-client is a simple and lightweight JIRA REST client library for Java.
 
+This is a fork of [rcarz/jira-client](https://github.com/rcarz/jira-client) with fixes by [tomaszstaniewicz](https://github.com/tomaszstaniewicz/jira-client) and further fixes by robertoschwald.
+
 The goal of the project is to provide **simple** and clean English idiomatic expressions for interacting with JIRA. In pursuit of this goal, jira-client lacks the usual verbose and cumbersome contortions often found in Java applications. And since the implementation isn't buried under 57 layers of complicated abstractions, jira-client is easy to extend and debug.
 
 jira-client depends on [Apache HttpComponents](http://hc.apache.org/), [json-lib](http://json.sourceforge.net/), and [joda-time](http://www.joda.org/joda-time/).
@@ -32,9 +34,8 @@ Point your *settings.xml* at [Maven Central](http://repo1.maven.org/maven2) and 
 
 ```xml
     <dependency>
-      <groupId>net.rcarz</groupId>
-      <artifactId>jira-client</artifactId>
-      <version>0.5</version>
+      <groupId>io.github.robertoschwald</artifactId>
+      <version>0.7.5</version>
       <scope>compile</scope>
     </dependency>
 ```
