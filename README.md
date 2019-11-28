@@ -30,7 +30,7 @@ jira-client is still under heavy development. Here's what works:
 
 ## Gradle Dependency ##
 ```
-implementation('io.github.robertoschwald:jira-client:0.7.5-RELEASE')
+implementation('com.symentis:jira-client:0.7.5-RELEASE')
 ```
 ## Maven Dependency ##
 
