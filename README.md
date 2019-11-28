@@ -28,6 +28,10 @@ jira-client is still under heavy development. Here's what works:
 * Create sub-tasks
 * Retrieval of Rapid Board backlog and sprints
 
+## Gradle Dependency ##
+```
+implementation('io.github.robertoschwald:jira-client:0.7.5-RELEASE')
+```
 ## Maven Dependency ##
 
 Point your *settings.xml* at [Maven Central](http://repo1.maven.org/maven2) and add jira-client to your project.
@@ -35,7 +39,8 @@ Point your *settings.xml* at [Maven Central](http://repo1.maven.org/maven2) and 
 ```xml
     <dependency>
       <groupId>io.github.robertoschwald</artifactId>
-      <version>0.7.5</version>
+      <artifactId>jira-client</artifactId>
+      <version>0.7.5-RELEASE</version>
       <scope>compile</scope>
     </dependency>
 ```
