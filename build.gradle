@@ -57,7 +57,6 @@ artifactoryPublish {
     dependsOn sourcesJar, javadocJar
 }
 
-// Add the sourceJar / javadocJar to non-extractor modules. You must add "published" config to artifactory defaults { "publishConfigs" }
 artifacts {
     published sourcesJar
     published javadocJar
