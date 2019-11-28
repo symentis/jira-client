@@ -38,7 +38,7 @@ Point your *settings.xml* at [Maven Central](http://repo1.maven.org/maven2) and 
 
 ```xml
     <dependency>
-      <groupId>io.github.robertoschwald</artifactId>
+      <groupId>com.symentis</artifactId>
       <artifactId>jira-client</artifactId>
       <version>0.7.5-RELEASE</version>
       <scope>compile</scope>
