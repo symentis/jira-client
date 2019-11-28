@@ -1,7 +1,17 @@
+buildscript {
+    repositories {
+        jcenter()
+    }
+    dependencies {
+        classpath "org.jfrog.buildinfo:build-info-extractor-gradle:latest.release"
+    }
+}
+
 apply plugin: "java"
+apply plugin: 'maven-publish'
+apply plugin: "com.jfrog.artifactory"
 
-
-group = "io.github.robertoschwald"
+group = "com.symentis"
 version = "0.7.5-RELEASE"
 
 description = """A simple JIRA REST client"""
@@ -27,4 +37,52 @@ dependencies {
     testImplementation "org.powermock:powermock-module-junit4:1.6.3"
     testImplementation "org.powermock:powermock-api-mockito:1.6.3"
     testImplementation "org.codehaus.groovy:groovy-all:2.4.6"
+}
+
+configurations {
+    published // for artifactory javadocs / sources publishing
+}
+
+task sourcesJar(type: Jar, dependsOn: classes) {
+    classifier = 'sources'
+    from sourceSets.main.allSource
+}
+
+task javadocJar(type: Jar, dependsOn: javadoc) {
+    classifier = 'javadoc'
+    from javadoc.destinationDir
+}
+
+artifactoryPublish {
+    dependsOn sourcesJar, javadocJar
+}
+
+// Add the sourceJar / javadocJar to non-extractor modules. You must add "published" config to artifactory defaults { "publishConfigs" }
+artifacts {
+    published sourcesJar
+    published javadocJar
+}
+
+artifactory {
+    publish {
+        repository {
+            // ~/.gradle/gradle.properties
+            contextUrl = "${artifactoryUrl}"
+            username = "${artifactoryUser}"
+            password = "${artifactoryPassword}"
+            repoKey = project.version.contains("SNAPSHOT") ? 'libs-snapshot-local' : "libs-releases-local"
+            maven = true
+        }
+        defaults {
+            publishConfigs('archives', 'published')
+        }
+    }
+}
+
+publishing {
+    publications {
+        mavenJava(MavenPublication) {
+            from components.java
+        }
+    }
 }
