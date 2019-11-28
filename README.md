@@ -4,6 +4,8 @@
 
 jira-client is a simple and lightweight JIRA REST client library for Java.
 
+This is a fork of [rcarz/jira-client](https://github.com/rcarz/jira-client) with fixes by [tomaszstaniewicz](https://github.com/tomaszstaniewicz/jira-client) and further fixes.
+
 The goal of the project is to provide **simple** and clean English idiomatic expressions for interacting with JIRA. In pursuit of this goal, jira-client lacks the usual verbose and cumbersome contortions often found in Java applications. And since the implementation isn't buried under 57 layers of complicated abstractions, jira-client is easy to extend and debug.
 
 jira-client depends on [Apache HttpComponents](http://hc.apache.org/), [json-lib](http://json.sourceforge.net/), and [joda-time](http://www.joda.org/joda-time/).
@@ -26,15 +28,19 @@ jira-client is still under heavy development. Here's what works:
 * Create sub-tasks
 * Retrieval of Rapid Board backlog and sprints
 
+## Gradle Dependency ##
+```
+implementation('com.symentis:jira-client:0.7.5-RELEASE')
+```
 ## Maven Dependency ##
 
 Point your *settings.xml* at [Maven Central](http://repo1.maven.org/maven2) and add jira-client to your project.
 
 ```xml
     <dependency>
-      <groupId>net.rcarz</groupId>
+      <groupId>com.symentis</artifactId>
       <artifactId>jira-client</artifactId>
-      <version>0.5</version>
+      <version>0.7.5-RELEASE</version>
       <scope>compile</scope>
     </dependency>
 ```
