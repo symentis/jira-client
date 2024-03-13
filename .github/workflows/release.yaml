@@ -1,0 +1,29 @@
+name: Publish release
+on:
+  release:
+    types: [created]
+jobs:
+  test:
+    runs-on: ubuntu-latest
+
+    permissions:
+      contents: read
+      packages: write
+
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-java@v4
+        with:
+          java-version: '21'
+          distribution: 'temurin'
+
+      - uses: gradle/actions/setup-gradle@v3.1.0
+
+      - name: Run tests
+        run: gradle check
+
+      - name: Publish release
+        run: gradle publish -Pgithub_release_version=${{ github.event.release.tag_name }}
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
